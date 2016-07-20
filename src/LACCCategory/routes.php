@@ -1,4 +1,4 @@
 <?php
-Route::group( [ 'prefix' => 'categories', 'namespace' => 'LACCPress\LACCCategory\Controllers' ], function () {
-		Route::get( 'test', 'AdminCategoriesController@index' );
+Route::group( [ 'prefix' => 'admin/categories', 'namespace' => 'LACCPress\LACCCategory\Controllers' ], function () {
+		Route::get( '', 'AdminCategoriesController@index' );
 } );
