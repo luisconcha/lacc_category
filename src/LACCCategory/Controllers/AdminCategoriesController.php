@@ -11,10 +11,26 @@
  */
 namespace LACCPress\LACCCategory\Controllers;
 
+use LACCPress\LACCCategory\Models\Category;
+
 class AdminCategoriesController extends Controller
 {
+		private $category;
+
+		public function __construct( Category $category )
+		{
+				$this->category = $category;
+		}
+
 		public function index()
 		{
-				return view( 'lacccategory::index' );
+				$listCategories = $this->category->all();
+
+				return view( 'lacccategory::index', compact( 'listCategories' ) );
+		}
+
+		public function create()
+		{
+				return view( 'lacccategory::create' );
 		}
 }
