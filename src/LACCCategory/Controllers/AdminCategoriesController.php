@@ -11,6 +11,7 @@
  */
 namespace LACCPress\LACCCategory\Controllers;
 
+use Illuminate\Http\Request;
 use LACCPress\LACCCategory\Models\Category;
 
 class AdminCategoriesController extends Controller
@@ -25,12 +26,20 @@ class AdminCategoriesController extends Controller
 		public function index()
 		{
 				$listCategories = $this->category->all();
-
 				return view( 'lacccategory::index', compact( 'listCategories' ) );
 		}
 
 		public function create()
 		{
-				return view( 'lacccategory::create' );
+				$listCategories = $this->category->all();
+
+				return view( 'lacccategory::create', compact( 'listCategories' ) );
+		}
+
+		public function store( Request $request )
+		{
+				$this->category->create( $request->all() );
+
+				return redirect()->route( 'admin.categories.index' );
 		}
 }
