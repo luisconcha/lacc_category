@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>Slug</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
             @foreach($listCategories as $category)
                 <tr>
@@ -19,6 +20,9 @@
                     <td>{{$category->name}}</td>
                     <td>{{$category->slug}}</td>
                     <td>{{$category->active}}</td>
+                    <td>
+                        <a href="{{route('admin.categories.edit',['id'=>$category->id])}}">Edit</a>
+                    </td>
                 </tr>
             @endforeach
         </table>

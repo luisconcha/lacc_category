@@ -35,7 +35,7 @@ class AdminCategoriesController extends Controller
 
 		public function create()
 		{
-				$listCategories = $this->category->all();
+				$listCategories = [ '' => '--Selecione uma categoria--' ] + $this->category->lists( 'name', 'id' )->all();
 
 				return view( 'lacccategory::create', compact( 'listCategories' ) );
 		}
@@ -45,5 +45,18 @@ class AdminCategoriesController extends Controller
 				$this->category->create( $request->all() );
 
 				return redirect()->route( 'admin.categories.index' );
+		}
+
+		public function edit( $id )
+		{
+				$category       = $this->category->find( $id );
+				$listCategories = [ '' => '--Selecione uma categoria--' ] + $this->category->lists( 'name', 'id' )->all();
+
+				return $this->response->view( 'lacccategory::edit', compact( 'category', 'listCategories' ) );
+		}
+
+		public function update( Request $request )
+		{
+				dd( $request );
 		}
 }
