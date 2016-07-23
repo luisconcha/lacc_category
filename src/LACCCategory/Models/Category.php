@@ -13,6 +13,7 @@ namespace LACCPress\LACCCategory\Models;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model implements SluggableInterface
@@ -31,6 +32,8 @@ class Category extends Model implements SluggableInterface
 			'parent_id',
 		];
 
+		private $validator;
+
 		/**
 		 * Categorização de qualquer outro model que exista
 		 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
@@ -48,5 +51,24 @@ class Category extends Model implements SluggableInterface
 		public function children()
 		{
 				return $this->hasMany( Category::class, 'parent_id' );
+		}
+
+		public function setValidator( Validator $validator )
+		{
+				$this->validator = $validator;
+		}
+
+		public function getValidator()
+		{
+				return $this->validator;
+		}
+
+		public function isValid()
+		{
+				$validator = $this->validator;
+				$validator->setRules( [ 'name' => 'required|max:255' ] );
+				$validator->setData( $this->getAttributes() );
+
+				return !$validator->fails();//retorna true se falhou
 		}
 }

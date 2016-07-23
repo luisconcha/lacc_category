@@ -11,22 +11,26 @@
  */
 namespace LACCPress\LACCCategory\Controllers;
 
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use LACCPress\LACCCategory\Models\Category;
 
 class AdminCategoriesController extends Controller
 {
 		private $category;
+		private $response;
 
-		public function __construct( Category $category )
+		public function __construct( ResponseFactory $response, Category $category )
 		{
 				$this->category = $category;
+				$this->response = $response;
 		}
 
 		public function index()
 		{
 				$listCategories = $this->category->all();
-				return view( 'lacccategory::index', compact( 'listCategories' ) );
+
+				return $this->response->view( 'lacccategory::index', compact( 'listCategories' ) );
 		}
 
 		public function create()
