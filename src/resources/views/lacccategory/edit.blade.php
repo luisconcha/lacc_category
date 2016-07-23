@@ -10,7 +10,7 @@
         @include('lacccategory::_form')
 
         <div class="form-group">
-            {!! Form::submit('Edit category', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Edit', ['class'=>'btn btn-primary','id'=>'Edit', 'name'=>'Edit']) !!}
             <a href="{{route('admin.categories.index')}}" class="btn btn-warning">Return</a>
         </div>
 

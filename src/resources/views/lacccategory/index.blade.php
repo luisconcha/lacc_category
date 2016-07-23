@@ -21,7 +21,8 @@
                     <td>{{$category->slug}}</td>
                     <td>{{$category->active}}</td>
                     <td>
-                        <a href="{{route('admin.categories.edit',['id'=>$category->id])}}">Edit</a>
+                        <a href="{{route('admin.categories.edit',['id'=>$category->id])}}">Edit</a> |
+                        <a href="{{route('admin.categories.destroy',['id'=>$category->id])}}">Delete</a>
                     </td>
                 </tr>
             @endforeach

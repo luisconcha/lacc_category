@@ -55,8 +55,20 @@ class AdminCategoriesController extends Controller
 				return $this->response->view( 'lacccategory::edit', compact( 'category', 'listCategories' ) );
 		}
 
-		public function update( Request $request )
+		public function update( Request $request, $id )
 		{
-				dd( $request );
+				$catId = $id;
+				$input = $request->all();
+				$this->category->find( $catId )->update( $input );
+
+				return redirect()->route( 'admin.categories.index' );
 		}
+
+		public function destroy( $id )
+		{
+				$this->category->find( $id )->delete();
+
+				return redirect()->route( 'admin.categories.index' );
+		}
+
 }
